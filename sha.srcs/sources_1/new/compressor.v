@@ -10,12 +10,12 @@ module compressor (
 );
 
 parameter w = 32;
-// local round number for all the 8 instances of hardware one after the other
+
 wire [5:0] local_round [7:0];
-wire [31:0] kcOut [7:0]; // one for each of the 8 instances of K_constants.v
-wire [31:0] T1 [7:0], T2 [7:0]; // 8 temporary for the 8 instances  
-wire [31:0] a_reg [7:0], b_reg [7:0], c_reg [7:0], d_reg [7:0]; // 8 for 8 instances
-wire [31:0] e_reg [7:0], f_reg [7:0], g_reg [7:0], h_reg [7:0]; // 8 for 8 instances
+wire [31:0] kcOut [7:0];
+wire [31:0] T1 [7:0], T2 [7:0];
+wire [31:0] a_reg [7:0], b_reg [7:0], c_reg [7:0], d_reg [7:0];
+wire [31:0] e_reg [7:0], f_reg [7:0], g_reg [7:0], h_reg [7:0];
 
 
 assign ao = a_reg[7];
@@ -56,7 +56,6 @@ generate
     end
 endgenerate
 
-// Functions
 
 function [31:0] Maj(input [31:0] x, input [31:0] y, input [31:0] z);
     Maj = (x & y) ^ (x & z) ^ (y & z);

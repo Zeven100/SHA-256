@@ -6,17 +6,14 @@ module main (
      input wire [16 * 32 - 1 : 0] in ,
      output reg [8*32 -1 : 0]out 
 );
-reg [3:0]round_nm_reg , round_nm_new ; // goes from 1 to 10 
-reg [1:0]round_ctrl_reg , round_ctrl_new ; // holds FSM state
-reg round_nm_rst , round_nm_inc ; 
-// 4 states
+reg [3:0]round_nm_reg , round_nm_new ;
+reg [1:0]round_ctrl_reg , round_ctrl_new ;
+reg round_nm_rst , round_nm_inc ;
 parameter [1:0]CTRL_IDLE = 2'b00 , CTRL_INIT = 2'b01 , CTRL_MAIN = 2'b10 , CTRL_FINAL = 2'b11 ;
-
 reg [31:0]a_reg , b_reg , c_reg , d_reg , e_reg , f_reg , g_reg , h_reg ;
 reg [31:0]a_new , b_new , c_new , d_new , e_new , f_new , g_new , h_new ;
 wire [31:0]a_wire , b_wire , c_wire , d_wire , e_wire , f_wire , g_wire , h_wire ;
 
-// initial values
 wire [31:0]H0_0 = 32'h6A09E667 ;
 wire [31:0]H1_0 = 32'hBB67AE85 ;
 wire [31:0]H2_0 = 32'h3C6EF372 ;
@@ -26,7 +23,7 @@ wire [31:0]H5_0 = 32'h9B05688C ;
 wire [31:0]H6_0 = 32'h1F83D9AB ;
 wire [31:0]H7_0 = 32'h5BE0CD19 ;
 
-reg [31:0]H0 , H1 , H2 , H3 , H4 , H5 , H6 , H7  ; // to hold the final result
+reg [31:0]H0 , H1 , H2 , H3 , H4 , H5 , H6 , H7  ; 
 
 
 wire [64 * 32 - 1 : 0]W ;
@@ -34,9 +31,6 @@ message_scheduler ms_inst(in , W) ;
 compressor c_inst(a_reg , b_reg , c_reg , d_reg , e_reg , f_reg , g_reg , h_reg ,
                     round_nm_reg - 4'd2 , W , 
                     a_wire , b_wire , c_wire , d_wire , e_wire , f_wire , g_wire , h_wire ) ;
-
-
-
 always @(posedge clk ) begin
      if(~reset_n)begin
           round_nm_reg <= 0 ;
@@ -55,7 +49,7 @@ always @(posedge clk ) begin
           h_reg <= h_new ;
      end
 end
-// round number controller
+
 always @ * begin
      round_nm_new = 0 ;
      if(round_nm_rst )begin
@@ -65,7 +59,7 @@ always @ * begin
           round_nm_new = round_nm_reg + 1 ;
      end
 end
-// FSM to control the rounds logic
+
 always @ * begin
      round_nm_rst = 0 ;
      round_nm_inc = 0 ;

@@ -5,7 +5,8 @@ module message_scheduler (
 );
 parameter w = 32;
 
-reg [32*64 - 1:0] W; 
+
+reg [32*64 - 1:0] W;
 assign out = W;
 
 integer i;

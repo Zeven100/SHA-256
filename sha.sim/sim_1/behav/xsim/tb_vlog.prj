@@ -1,0 +1,9 @@
+# compile verilog/system verilog design source files
+verilog xil_defaultlib "C:/Users/jains/OneDrive/Desktop/vlsi/sha/sha.srcs/sources_1/new/message_scheduler.v" "C:/Users/jains/OneDrive/Desktop/vlsi/sha/sha.srcs/sources_1/new/k_constants.v" "C:/Users/jains/OneDrive/Desktop/vlsi/sha/sha.srcs/sources_1/new/compressor.v" "C:/Users/jains/OneDrive/Desktop/vlsi/sha/sha.srcs/sources_1/new/main.v" --include "../../../../sha.srcs/sources_1/new" \
+"../../../../sha.srcs/sim_1/new/tb.v" \
+
+# compile glbl module
+verilog xil_defaultlib "glbl.v"
+
+# Do not sort compile order
+nosort
